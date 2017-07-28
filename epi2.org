@@ -1,0 +1,127 @@
+* How to: Put the numbers aligned in the same line as the corresponding string
+** Example
+*FROM THIS*
+one	
+two	
+three	
+four	
+five	
+six	
+seven	
+eight	
+nine	
+ten
+1 
+2
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10
+*TO THIS:*
+one	1 
+two	2 
+three	3 
+four	4 
+five	5 
+six	6 
+seven	7 
+eight	8 
+nine	9 
+ten	10
+** Start a kbd-macro with 'C-x (' and go to the end of the line 'M->'
+one	
+two	
+three	
+four	
+five	
+six	
+seven	
+eight	
+nine	
+ten
+1 
+2
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10
+** Go up one line, then kill the '10'
+one	
+two	
+three	
+four	
+five	
+six	
+seven	
+eight	
+nine	
+ten
+1 
+2
+3 
+4 
+5 
+6 
+7 
+8 
+9
+X
+** 'C-10 C-p' to repeat 10 times the command previous line 
+one	
+two	
+three	
+four	
+five	
+six	
+seven	
+eight	
+nine	
+Xen
+1 
+2
+3 
+4 
+5 
+6 
+7 
+8 
+9
+** 'C-e',' then 'C-q tab' to jump a tab, yank the '10', then end the macro with 'C-)
+one	
+two	
+three	
+four	
+five	
+six	
+seven	
+eight	
+nine	
+ten	10X
+1 
+2
+3 
+4 
+5 
+6 
+7 
+8 
+9
+** Execute the macro 9 times with 'C-9 C-x e'
+one	1
+two	2
+three	3
+four	4
+five	5
+six	6
+seven	7
+eight	8
+nine	9
+ten	10
