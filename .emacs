@@ -1,6 +1,5 @@
 (setq inhibit-startup-message t)
 
-;;(require 'org)
 ;; Make org-mode work with files ending in .org
  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -22,10 +21,11 @@
  '(package-archives
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
+     ("org" . "http://orgmode.org/elpa/")
      ("melpa-stable" . "http://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (vline web-mode cider queue pkg-info multiple-cursors haskell-mode dash clojure-mode))))
+    (multi-web-mode iy-go-to-char vline web-mode cider queue pkg-info multiple-cursors haskell-mode dash clojure-mode))))
 
 ;; setup load-path and autoloads
 (add-to-list 'load-path "~/Applications/slime")
@@ -44,7 +44,6 @@
 (require 'package)
 ;;  elpa
 (add-to-list 'package-archives              
-
 	      '("elpa" . "http://tromey.com/elpa/"))
 
 	     
@@ -56,8 +55,21 @@
 
 (add-to-list 'load-path "~/.emacs.d/elpa/fill-column-indicator/")
 (require 'fill-column-indicator)
-(setq fci-rule-column 74)
+(setq fci-rule-column 70)
 (setq fci-rule-color "darkviolet")
+
+
+(add-to-list 'load-path "~/.emacs.d/elpa/iy-go-to-char/")
+(require 'iy-go-to-char)
+(global-set-key (kbd "C-c f") 'iy-go-to-char)
+(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)
+			     (lisp . t)
+			     ))
 
 (package-initialize)
 
