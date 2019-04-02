@@ -38,7 +38,20 @@
 (setq fci-rule-column 80)
 (setq fci-rule-color "violet")
 
+;; automatic inclusion of drawing pagckages for org-export-latex
+(with-eval-after-load 'ox-latex
+   (add-to-list 'org-latex-classes
+                '("article"
+                  "\\documentclass[a4paper,12pt]{article}
+		  \\usepackage{tikz}
+                  \\usepackage{pgfplots}")))
+
+  'org-export-latex-classes
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
@@ -51,7 +64,7 @@
    '(("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa-stable" . "http://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(color-theme-sanityinc-tomorrow multiple-cursors expand-region magit s-buffer iy-go-to-char fill-column-indicator ess ein multiple-cursors clojure-mode))
+   '(htmlize color-theme-sanityinc-tomorrow multiple-cursors expand-region magit s-buffer iy-go-to-char fill-column-indicator ess ein multiple-cursors clojure-mode))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    '((20 . "#d54e53")
@@ -82,8 +95,6 @@
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
 
-
-
 ;;Packages
 (require 'package)
 ;;  elpa
@@ -110,7 +121,7 @@
 ;; moving
 (setq next-line-add-newlines t)
 ;; note ';' go to next char and ',' go to previous
-(global-set-key (kbd "C-c g") 'iy-go-to-char)
+(global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c b") 'iy-go-to-char-backward)
 (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
 (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
@@ -124,7 +135,7 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-M-m") 'mc/mark-more-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
+(global-set-key (kbd "C-x g") 'magit-status)
 (setq org-src-tab-acts-natively t)
 
 (org-babel-do-load-languages
@@ -135,4 +146,14 @@
 (package-initialize)
 
 (put 'downcase-region 'disabled nil)
-(custom-set-faces)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+
+
+
