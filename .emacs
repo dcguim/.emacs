@@ -45,8 +45,8 @@
                   "\\documentclass[a4paper,12pt]{article}
 		  \\usepackage{tikz}
                   \\usepackage{pgfplots}")))
+(setq org-latex-create-formula-image-program 'imagemagick)
 
-  'org-export-latex-classes
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
