@@ -156,8 +156,9 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq org-src-tab-acts-natively t)
 
+(require 'ob-shell)
 (org-babel-do-load-languages
- 'org-babel-load-languages '((sh . t)
+ 'org-babel-load-languages '((shell . t)
 			     (C . t)
 			     (lisp . t)
 			     (latex . t)))
