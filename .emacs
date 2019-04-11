@@ -4,10 +4,12 @@
 ;; Uncomment to debug .emacs
 ;;(setq debug-on-error t)
 
-;; trigger some modes
+;; enable some modes
 (setq column-number-mode t)
 (setq line-number-mode t)
-(setq ido-mode t)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 
 ;; Make org-mode work with files ending in .org
