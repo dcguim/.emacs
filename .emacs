@@ -1,11 +1,14 @@
 (setq inhibit-startup-message t)
-(setq column-number-mode t)
-(setq line-number-mode t)
 (if window-system
     (tool-bar-mode -1))
-
 ;; Uncomment to debug .emacs
 ;;(setq debug-on-error t)
+
+;; trigger some modes
+(setq column-number-mode t)
+(setq line-number-mode t)
+(setq ido-mode t)
+
 
 ;; Make org-mode work with files ending in .org
  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -33,6 +36,12 @@
 (add-hook 'c-mode-common-hook '(lambda ()
 				 (local-set-key (kbd "RET") 'newline-and-indent)))
 
+(setq imagemagick '(imagemagick :programs ("latex" "convert")
+				:description "pdf > png"
+				:message "you need to install the programs: latex and imagemagick."
+				:use-xcolor t
+				:image-input-type "pdf"
+				:image-output-type ...))
 ;; vertical limit line
 (add-to-list 'load-path "~/.emacs.d/elpa/fill-column-indicator/")
 (setq fci-rule-column 80)
@@ -44,8 +53,17 @@
                 '("article"
                   "\\documentclass[a4paper,12pt]{article}
 		  \\usepackage{tikz}
-                  \\usepackage{pgfplots}")))
+                  \\usepackage{pgfplots"
+		  ("\\section{%s}" . "\\section{%s}")
+		  ("\\subsection{%s}" . "\\subsection{%s}")
+		  ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+		  ("\\paragraph{%s}" . "\\paragraph{%s}")
+		  ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
 (setq org-latex-create-formula-image-program 'imagemagick)
+(setq org-babel-latex-htlatex "htlatex")
+   (defmacro by-backend (&rest body)
+   `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -139,7 +157,8 @@
 (setq org-src-tab-acts-natively t)
 
 (org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)
+ 'org-babel-load-languages '((sh . t)
+			     (C . t)
 			     (lisp . t)
 			     (latex . t)))
 
