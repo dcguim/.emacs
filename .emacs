@@ -11,7 +11,6 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-
 ;; Make org-mode work with files ending in .org
  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -44,6 +43,7 @@
 				:use-xcolor t
 				:image-input-type "pdf"
 				:image-output-type ...))
+
 ;; vertical limit line
 (add-to-list 'load-path "~/.emacs.d/elpa/fill-column-indicator/")
 (setq fci-rule-column 80)
@@ -55,17 +55,14 @@
                 '("article"
                   "\\documentclass[a4paper,12pt]{article}
 		  \\usepackage{tikz}
-                  \\usepackage{pgfplots"
+                  \\usepackage{pgfplots}
+                  \\usetikzlibrary{arrows}"
 		  ("\\section{%s}" . "\\section{%s}")
 		  ("\\subsection{%s}" . "\\subsection{%s}")
 		  ("\\subsubsection{%s}" . "\\subsubsection{%s}")
 		  ("\\paragraph{%s}" . "\\paragraph{%s}")
 		  ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
 (setq org-latex-create-formula-image-program 'imagemagick)
-(setq org-babel-latex-htlatex "htlatex")
-   (defmacro by-backend (&rest body)
-   `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -140,7 +137,11 @@
 
 ;; moving
 (setq next-line-add-newlines t)
-;; note ';' go to next char and ',' go to previous
+(global-set-key (kbd "C-p") 'forward-char)
+(global-set-key (kbd "C-i") 'backward-char)
+(global-set-key (kbd "C-9") 'previous-line)
+(global-set-key (kbd "C-o") 'next-line)
+;; iy note ';' go to next char and ',' go to previous
 (global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c b") 'iy-go-to-char-backward)
 (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
@@ -148,12 +149,12 @@
 (global-set-key (kbd "C-c C-g") 'iy-go-to-char-done)
 
 ;; additional rebindings
-(global-set-key (kbd "M-s s") 'other-frame)
+(global-set-key (kbd "C-c s") 'other-frame)
 (global-set-key (kbd "C-c C-f") 'load-file)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-M-m") 'mc/mark-more-like-this)
+;(global-set-key (kbd "C-M-m") 'mc/mark-more-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq org-src-tab-acts-natively t)
