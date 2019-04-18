@@ -150,6 +150,7 @@
 
 ;; additional rebindings
 (global-set-key (kbd "C-c s") 'other-frame)
+(global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "C-c C-f") 'load-file)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
