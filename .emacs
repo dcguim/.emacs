@@ -12,7 +12,7 @@
 (ido-mode 1)
 
 ;; Make org-mode work with files ending in .org
- (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 ;; color theme
 (add-to-list 'load-path "~/.emacs.d/elpa/color-theme-sanityinc-tomorrow-1.17/")
@@ -141,6 +141,10 @@
 (global-set-key (kbd "C-i") 'backward-char)
 (global-set-key (kbd "C-9") 'previous-line)
 (global-set-key (kbd "C-o") 'next-line)
+(eval-after-load "dired"
+  '(progn(define-key dired-mode-map (kbd "C-o") 'next-line)))
+(global-set-key (kbd "TAB") 'self-insert-command);
+
 ;; iy note ';' go to next char and ',' go to previous
 (global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c b") 'iy-go-to-char-backward)
@@ -168,6 +172,10 @@
 			     (latex . t)))
 
 (package-initialize)
+
+;; exec-path-from-shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (put 'downcase-region 'disabled nil)
 (custom-set-faces
