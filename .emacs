@@ -38,11 +38,11 @@
                                  (local-set-key (kbd "RET") 'newline-and-indent)))
 
 (setq imagemagick '(imagemagick :programs ("latex" "convert")
-                :description "pdf > png"
-				:message "you need to install the programs: latex and imagemagick."
-				:use-xcolor t
-				:image-input-type "pdf"
-				:image-output-type ...))
+                                :description "pdf > png"
+                                :message "you need to install the programs: latex and imagemagick."
+                                :use-xcolor t
+                                :image-input-type "pdf"
+                                :image-output-type ...))
 
 ;; vertical limit line
 (add-to-list 'load-path "~/.emacs.d/elpa/fill-column-indicator/")
@@ -118,6 +118,7 @@
 (add-to-list 'package-archives
               '("elpa" . "http://tromey.com/elpa/"))
 
+             
 ;;  marmalade
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
@@ -138,6 +139,7 @@
 (setq next-line-add-newlines t)
 (global-set-key (kbd "C-/") 'forward-char)
 (global-set-key (kbd "M-/") 'forward-word)
+(org-defkey org-mode-map (kbd "C-,") 'backward-char)
 (global-set-key (kbd "C-,") 'backward-char)
 (global-set-key (kbd "M-,") 'backward-word)
 (global-set-key (kbd "C-l") 'previous-line)
@@ -170,8 +172,7 @@
 (add-hook 'python-mode-hook
       (lambda ()
         (setq indent-tabs-mode nil)
-        (setq python-indent 4)
-        (setq tab-width 4))
+        (setq python-indent 4))
       (untabify (point-min) (point-max)))
 
 (require 'ob-shell)
