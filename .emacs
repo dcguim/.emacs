@@ -35,10 +35,10 @@
 
 ;; A hook for c programming identation
 (add-hook 'c-mode-common-hook '(lambda ()
-				 (local-set-key (kbd "RET") 'newline-and-indent)))
+                                 (local-set-key (kbd "RET") 'newline-and-indent)))
 
 (setq imagemagick '(imagemagick :programs ("latex" "convert")
-				:description "pdf > png"
+                :description "pdf > png"
 				:message "you need to install the programs: latex and imagemagick."
 				:use-xcolor t
 				:image-input-type "pdf"
@@ -54,14 +54,14 @@
    (add-to-list 'org-latex-classes
                 '("article"
                   "\\documentclass[a4paper,12pt]{article}
-		  \\usepackage{tikz}
+                  \\usepackage{tikz}
                   \\usepackage{pgfplots}
                   \\usetikzlibrary{arrows}"
-		  ("\\section{%s}" . "\\section{%s}")
-		  ("\\subsection{%s}" . "\\subsection{%s}")
-		  ("\\subsubsection{%s}" . "\\subsubsection{%s}")
-		  ("\\paragraph{%s}" . "\\paragraph{%s}")
-		  ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
+                  ("\\section{%s}" . "\\section{%s}")
+                  ("\\subsection{%s}" . "\\subsection{%s}")
+                  ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+                  ("\\paragraph{%s}" . "\\paragraph{%s}")
+                  ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
 (setq org-latex-create-formula-image-program 'imagemagick)
 
 (custom-set-variables
@@ -116,9 +116,8 @@
 (require 'package)
 ;;  elpa
 (add-to-list 'package-archives
-	      '("elpa" . "http://tromey.com/elpa/"))
+              '("elpa" . "http://tromey.com/elpa/"))
 
-	     
 ;;  marmalade
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
@@ -127,22 +126,25 @@
       '((sequence "TODO" "IN-PROGRESS" "DELEGATED" "|" "DONE")))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
-	("IN-PROGRESS" . "darkviolet")
-	("REFACTOR" . "blue")
-	("DELEGATED" . "brown")
-	("DONE" .  "darkgreen")))
+        ("IN-PROGRESS" . "darkviolet")
+        ("REFACTOR" . "blue")
+        ("DELEGATED" . "brown")
+        ("DONE" .  "darkgreen")))
 
 ;; Efective Keyboard Cmds
 (setq ns-function-modifier 'super)
 
 ;; moving
 (setq next-line-add-newlines t)
-(global-set-key (kbd "C-p") 'forward-char)
-(global-set-key (kbd "C-i") 'backward-char)
-(global-set-key (kbd "C-9") 'previous-line)
-(global-set-key (kbd "C-o") 'next-line)
+(global-set-key (kbd "C-/") 'forward-char)
+(global-set-key (kbd "M-/") 'forward-word)
+(global-set-key (kbd "C-,") 'backward-char)
+(global-set-key (kbd "M-,") 'backward-word)
+(global-set-key (kbd "C-l") 'previous-line)
+(global-set-key (kbd "C-.") 'next-line)
 (eval-after-load "dired"
-  '(progn(define-key dired-mode-map (kbd "C-o") 'next-line)))
+  '(progn(define-key dired-mode-map (kbd "C-.") 'next-line)
+                 (define-key dired-mode-map (kbd "C-l") 'previous-line)))
 (global-set-key (kbd "TAB") 'self-insert-command);
 
 ;; iy note ';' go to next char and ',' go to previous
@@ -159,17 +161,25 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;(global-set-key (kbd "C-M-m") 'mc/mark-more-like-this)
+(global-set-key (kbd "C-M-m") 'mc/mark-more-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq org-src-tab-acts-natively t)
 
+;; python ident by spaces rather than TAB
+(add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq python-indent 4)
+        (setq tab-width 4))
+      (untabify (point-min) (point-max)))
+
 (require 'ob-shell)
 (org-babel-do-load-languages
  'org-babel-load-languages '((shell . t)
-			     (C . t)
-			     (lisp . t)
-			     (latex . t)))
+                             (C . t)
+                             (lisp . t)
+                             (latex . t)))
 
 (package-initialize)
 
