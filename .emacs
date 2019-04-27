@@ -30,8 +30,7 @@
 (add-to-list 'auto-mode-alist '("\\.r\\'" . r-mode))
 
 ;; clojure mode
-(add-to-list 'load-path "~/.emacs.d/elpa/clojure-mode-1.7.1/")
-(add-to-list 'auto-mode-alist '("\\.clj\\'" . minizinc-mode))
+(add-to-list 'load-path "~/.emacs.d/elpa/clojure-mode-5.10.0/")
 
 ;; A hook for c programming identation
 (add-hook 'c-mode-common-hook '(lambda ()
@@ -50,6 +49,18 @@
 (setq fci-rule-color "violet")
 
 ;; automatic inclusion of drawing pagckages for org-export-latex
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+             '("beamer"
+               "\\documentclass[presentation]{beamer}
+               \\usepackage{tikz}
+               \\usepackage{pgfplots}
+               \\usetikzlibrary{arrows}
+               \\usefonttheme{serif}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
 (with-eval-after-load 'ox-latex
    (add-to-list 'org-latex-classes
                 '("article"
@@ -139,7 +150,8 @@
 (setq next-line-add-newlines t)
 (global-set-key (kbd "C-/") 'forward-char)
 (global-set-key (kbd "M-/") 'forward-word)
-(org-defkey org-mode-map (kbd "C-,") 'backward-char)
+(with-eval-after-load 'org
+(org-defkey org-mode-map (kbd "C-,") 'backward-char))
 (global-set-key (kbd "C-,") 'backward-char)
 (global-set-key (kbd "M-,") 'backward-word)
 (global-set-key (kbd "C-l") 'previous-line)
@@ -168,6 +180,8 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq org-src-tab-acts-natively t)
 
+;; export-tools
+(global-set-key (kbd "C-c M-e b") 'org-beamer-export-to-pdf)
 ;; python ident by spaces rather than TAB
 (add-hook 'python-mode-hook
       (lambda ()
@@ -183,10 +197,6 @@
                              (latex . t)))
 
 (package-initialize)
-
-;; exec-path-from-shell
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 
 (put 'downcase-region 'disabled nil)
 (custom-set-faces
